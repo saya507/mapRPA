@@ -27,7 +27,7 @@ from pathlib import Path
 from email.mime.multipart import MIMEMultipart
 import mimetypes
 from apiclient import errors
-from featureC.gmail_credential import get_credential
+from gmail_credential import get_credential
 from docopt import docopt
 import logging
 
@@ -138,63 +138,6 @@ def main(sender, to, subject, message_text, attach_file_path, cc=None):
     send_message(service, "me", message)
 
 
-def kick_main(flag,cus_address,pdf, sender):
-    # 成功
-    if flag == "success": #変数決めて変更
-        subject = "地図取得成功のお知らせ"
-        message_text_file_path = "suc.text"
-        logging.basicConfig(level=logging.DEBUG)
-        with open(message_text_file_path, "r", encoding="utf-8") as fp:
-            message_text = fp.read()
-        
-        main(
-        sender=sender,
-        to=cus_address,
-        subject=subject,
-        message_text=message_text,
-        attach_file_path=pdf,
-        )
-
-    # 失敗
-    if flag == "false": #変数決めて変更
-        subject = "地図取得失敗のお知らせ"
-        message_text_file_path = "fail_all.text"
-
-        logging.basicConfig(level=logging.DEBUG)
-        with open(message_text_file_path, "r", encoding="utf-8") as fp:
-            message_text = fp.read()
-        
-        main(
-        sender=sender,
-        to=cus_address,
-        subject=subject,
-        message_text=message_text,
-        attach_file_path=pdf,
-        )
-
-    # 一部失敗
-    if flag == "half":
-        to = cus_address
-        subject = "地図取得一部失敗のお知らせ"
-        message_text_file_path = "fail.text"
-        attach_file_path = pdf #変更
-
-        logging.basicConfig(level=logging.DEBUG)
-        with open(message_text_file_path, "r", encoding="utf-8") as fp:
-            message_text = fp.read()
-        
-        main(
-        sender=sender,
-        to=to,
-        subject=subject,
-        message_text=message_text,
-        attach_file_path=attach_file_path,
-        )
-
-
-
-
-
 # # プログラム実行部分
 # if __name__ == "__main__":
 #     arguments = docopt(__doc__, version="0.1")
@@ -220,3 +163,52 @@ def kick_main(flag,cus_address,pdf, sender):
 #         attach_file_path=attach_file_path,
 #         cc=cc,
 #     )
+
+
+
+# ###成功
+# if __name__ == "__main__": #変数決めて変更
+#     sender = "a211410n@gmail.com"
+#     to = "a211410n@gmail.com"
+#     subject = "地図取得成功のお知らせ"
+#     message_text_file_path = "suc.text"
+#     attach_file_path = "test.pdf" #変更
+
+#     logging.basicConfig(level=logging.DEBUG)
+
+#     # withとは、ファイルのopenからcloseについて、インデントが終われば勝手にcloseしてくれる。
+#     with open(message_text_file_path, "r", encoding="utf-8") as fp:
+#         message_text = fp.read()
+
+#     main(
+#         sender=sender,
+#         to=to,
+#         subject=subject,
+#         message_text=message_text,
+#         attach_file_path=attach_file_path,
+#     )
+
+
+# ### 失敗　(エラー理由)
+# if __name__ == "__main__": #変数決めて変更
+#     sender = "a211410n@gmail.com"
+#     to = "a211410n@gmail.com"
+#     subject = "地図取得失敗"
+#     message_text_file_path = "fail_all.text"
+#     attach_file_path = "test.pdf" #変更
+#     # arguments ：コマンドで入力する
+
+#     logging.basicConfig(level=logging.DEBUG)
+
+#     # withとは、ファイルのopenからcloseについて、インデントが終われば勝手にcloseしてくれる。
+#     with open(message_text_file_path, "r", encoding="utf-8") as fp:
+#         message_text = fp.read()
+
+#     main(
+#         sender=sender,
+#         to=to,
+#         subject=subject,
+#         message_text=message_text,
+#         attach_file_path=attach_file_path,
+#     )
+
