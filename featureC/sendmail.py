@@ -166,27 +166,27 @@ def main(sender, to, subject, message_text, attach_file_path, cc=None):
 
 
 
-###成功
-if __name__ == "__main__": #変数決めて変更
-    sender = "a211410n@gmail.com"
-    to = "a211410n@gmail.com"
-    subject = "地図取得成功のお知らせ"
-    message_text_file_path = "suc.text"
-    attach_file_path = "test.pdf" #変更
+# ###成功
+# if __name__ == "__main__": #変数決めて変更
+#     sender = "a211410n@gmail.com"
+#     to = "a211410n@gmail.com"
+#     subject = "地図取得成功のお知らせ"
+#     message_text_file_path = "suc.text"
+#     attach_file_path = "test.pdf" #変更
 
-    logging.basicConfig(level=logging.DEBUG)
+#     logging.basicConfig(level=logging.DEBUG)
 
-    # withとは、ファイルのopenからcloseについて、インデントが終われば勝手にcloseしてくれる。
-    with open(message_text_file_path, "r", encoding="utf-8") as fp:
-        message_text = fp.read()
+#     # withとは、ファイルのopenからcloseについて、インデントが終われば勝手にcloseしてくれる。
+#     with open(message_text_file_path, "r", encoding="utf-8") as fp:
+#         message_text = fp.read()
 
-    main(
-        sender=sender,
-        to=to,
-        subject=subject,
-        message_text=message_text,
-        attach_file_path=attach_file_path,
-    )
+#     main(
+#         sender=sender,
+#         to=to,
+#         subject=subject,
+#         message_text=message_text,
+#         attach_file_path=attach_file_path,
+#     )
 
 
 # ### 失敗　(エラー理由)
