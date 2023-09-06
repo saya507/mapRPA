@@ -138,31 +138,31 @@ def main(sender, to, subject, message_text, attach_file_path, cc=None):
     send_message(service, "me", message)
 
 
-# プログラム実行部分
-if __name__ == "__main__":
-    arguments = docopt(__doc__, version="0.1")
-    sender = arguments["<sender>"]
-    to = arguments["<to>"]
-    cc = arguments["--cc"]#"--"あってもなくても良いもの　一旦飛ばして最後に書き足す。（コマンド：sender to subject message...）
-    subject = arguments["<subject>"]
-    message_text_file_path = arguments["<message_text_file_path>"]
-    attach_file_path = arguments["--attach_file_path"]#""の中のコピー、スペース、ファイルのパス
-    # arguments ：コマンドで入力する
+# # プログラム実行部分
+# if __name__ == "__main__":
+#     arguments = docopt(__doc__, version="0.1")
+#     sender = arguments["<sender>"]
+#     to = arguments["<to>"]
+#     cc = arguments["--cc"]#"--"あってもなくても良いもの　一旦飛ばして最後に書き足す。（コマンド：sender to subject message...）
+#     subject = arguments["<subject>"]
+#     message_text_file_path = arguments["<message_text_file_path>"]
+#     attach_file_path = arguments["--attach_file_path"]#""の中のコピー、スペース、ファイルのパス
+#     # arguments ：コマンドで入力する
 
-    logging.basicConfig(level=logging.DEBUG)
+#     logging.basicConfig(level=logging.DEBUG)
 
-    # withとは、ファイルのopenからcloseについて、インデントが終われば勝手にcloseしてくれる。
-    with open(message_text_file_path, "r", encoding="utf-8") as fp:
-        message_text = fp.read()
+#     # withとは、ファイルのopenからcloseについて、インデントが終われば勝手にcloseしてくれる。
+#     with open(message_text_file_path, "r", encoding="utf-8") as fp:
+#         message_text = fp.read()
 
-    main(
-        sender=sender,
-        to=to,
-        subject=subject,
-        message_text=message_text,
-        attach_file_path=attach_file_path,
-        cc=cc,
-    )
+#     main(
+#         sender=sender,
+#         to=to,
+#         subject=subject,
+#         message_text=message_text,
+#         attach_file_path=attach_file_path,
+#         cc=cc,
+#     )
 
 
 
@@ -189,26 +189,26 @@ if __name__ == "__main__": #変数決めて変更
     )
 
 
-### 失敗　(エラー理由)
-if __name__ == "__main__": #変数決めて変更
-    sender = "a211410n@gmail.com"
-    to = "a211410n@gmail.com"
-    subject = "地図取得失敗"
-    message_text_file_path = "fail_all.text"
-    attach_file_path = "test.pdf" #変更
-    # arguments ：コマンドで入力する
+# ### 失敗　(エラー理由)
+# if __name__ == "__main__": #変数決めて変更
+#     sender = "a211410n@gmail.com"
+#     to = "a211410n@gmail.com"
+#     subject = "地図取得失敗"
+#     message_text_file_path = "fail_all.text"
+#     attach_file_path = "test.pdf" #変更
+#     # arguments ：コマンドで入力する
 
-    logging.basicConfig(level=logging.DEBUG)
+#     logging.basicConfig(level=logging.DEBUG)
 
-    # withとは、ファイルのopenからcloseについて、インデントが終われば勝手にcloseしてくれる。
-    with open(message_text_file_path, "r", encoding="utf-8") as fp:
-        message_text = fp.read()
+#     # withとは、ファイルのopenからcloseについて、インデントが終われば勝手にcloseしてくれる。
+#     with open(message_text_file_path, "r", encoding="utf-8") as fp:
+#         message_text = fp.read()
 
-    main(
-        sender=sender,
-        to=to,
-        subject=subject,
-        message_text=message_text,
-        attach_file_path=attach_file_path,
-    )
+#     main(
+#         sender=sender,
+#         to=to,
+#         subject=subject,
+#         message_text=message_text,
+#         attach_file_path=attach_file_path,
+#     )
 
