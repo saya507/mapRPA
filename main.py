@@ -1,10 +1,21 @@
+from featureA.listmail import listmail
+import json
 import featureC.__init__
 from featureC import kick_main
 
- 
-flag = "false"
-cus_address = "agroup0101@gmail.com"
-pdf = "test.pdf"
+def main():
+    messages_json = listmail()
+    messages_list = json.loads(messages_json)
+    print("type:"+str(type(messages_list)))
 
-sender = "agroup0101@gmail.com"
-kick_main(flag,cus_address,pdf,sender)
+    for message in messages_list:
+        research_address = message["body"]
+        mail_address = message["from"]
+    flag = "false"
+    cus_address = ""
+    pdf = "test.pdf"
+
+    sender = ""
+    kick_main(flag,cus_address,pdf,sender)
+
+main()
