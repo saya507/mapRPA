@@ -3,7 +3,8 @@ from featureC import kick_main
 
  
 flag = "false"
-cus_address = "a211410n@gmail.com"
+cus_address = "agroup0101@gmail.com"
 pdf = "test.pdf"
-sender = "a211410n@gmail.com"
+
+sender = "agroup0101@gmail.com"
 kick_main(flag,cus_address,pdf,sender)
