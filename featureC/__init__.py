@@ -156,7 +156,7 @@ def kick_main(flag,cus_address,pdf, sender):
         )
 
     # 失敗
-    if flag == "false": #変数決めて変更
+    elif flag == "false": #変数決めて変更
         subject = "地図取得失敗のお知らせ"
         message_text_file_path = "fail_all.text"
 
