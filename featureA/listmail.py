@@ -224,8 +224,8 @@ if __name__ == "__main__":
 def listmail():
     #query = "is:unread"
     query = "Map acquisition request"
-    #tag = "UNREAD"
-    tag = "test"
+    tag = "UNREAD"
+    #tag = "test"
     count = 10
     creds = get_credential()
     service = build("gmail", "v1", credentials=creds, cache_discovery=False)

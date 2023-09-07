@@ -22,6 +22,7 @@ from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.audio import MIMEAudio
+from email.mime.application import MIMEApplication
 from pathlib import Path
 
 from email.mime.multipart import MIMEMultipart
@@ -71,6 +72,7 @@ def create_message_with_attachment(
     if content_type is None or encoding is not None:
         content_type = "application/octet-stream"
     main_type, sub_type = content_type.split("/", 1)
+    print(main_type)
     if main_type == "text":
         with open(file_path, "rb") as fp:
             msg = MIMEText(fp.read(), _subtype=sub_type)
@@ -80,6 +82,9 @@ def create_message_with_attachment(
     elif main_type == "audio":
         with open(file_path, "rb") as fp:
             msg = MIMEAudio(fp.read(), _subtype=sub_type)
+    elif main_type == "application":
+        with open(file_path, "rb") as fp:
+            msg = MIMEApplication(fp.read(), _subtype=sub_type)
     else:
         with open(file_path, "rb") as fp:
             msg = MIMEBase(main_type, sub_type)
