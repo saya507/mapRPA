@@ -223,7 +223,7 @@ if __name__ == "__main__":
 
 def listmail():
     #query = "is:unread"
-    query = "住所取得依頼"
+    query = "Map acquisition request"
     #tag = "UNREAD"
     tag = "test"
     count = 10
