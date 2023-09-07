@@ -181,8 +181,8 @@ def main(query="is:unread", tag="daily_report", count=3):
     target_label_ids = [label["id"] for label in labels if label["name"] == tag]
     
     # メール一覧 [{'body': 'xxx', 'subject': 'xxx', 'from': 'xxx'},]
-    #messages = list_message(service, "me", query, target_label_ids, count=count)
-    messages = list_message(service, "me", query, "UNREAD", count=count)
+    messages = list_message(service, "me", query, target_label_ids, count=count)
+    #messages = list_message(service, "me", query, "UNREAD", count=count)
 
     # unread label
     unread_label_ids = [label["id"] for label in labels if label["name"] == "UNREAD"]
@@ -223,7 +223,8 @@ if __name__ == "__main__":
 
 def listmail():
     query = "is:unread"
-    tag = "UNREAD"
+    #tag = "UNREAD"
+    tag = "test"
     count = 10
     creds = get_credential()
     service = build("gmail", "v1", credentials=creds, cache_discovery=False)
@@ -241,7 +242,7 @@ def listmail():
     unread_label_ids = [label["id"] for label in labels if label["name"] == "UNREAD"]
 
     # remove labels form messages
-    remove_labels(service, "me", messages, remove_labels=unread_label_ids)
+    #remove_labels(service, "me", messages, remove_labels=unread_label_ids)
     logger.info(json.dumps(messages, ensure_ascii=False))
     if messages:
         return json.dumps(messages, ensure_ascii=False)
