@@ -1,7 +1,8 @@
 from featureA.listmail import listmail
+from featureB.normalize_address import normalize_address
+from featureC import kick_main
 import json
 import featureC.__init__
-from featureC import kick_main
 import my_mail_address
 
 def main():
@@ -10,14 +11,16 @@ def main():
 
     if(messages_json):
         messages_list = json.loads(messages_json)
-        #print("type:"+str(type(messages_list)))
+        print("type:"+str(type(messages_list)))
+        #print(messages_list[0]["body"])
     else:
         print("error in listmail.py")
         return
 
     for message in messages_list:
-        research_address = message["body"]
-        
+        research_address = normalize_address(message["body"])
+        #print(research_address)
+
         flag = "false"
         customer_address = message["from"]
         pdf = "test.pdf"
