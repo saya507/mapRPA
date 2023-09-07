@@ -9,34 +9,19 @@ import time
 import re
 
 def get_map_pdf(addresses):
-    #Chromeの設定
-    chromeOptions = webdriver.ChromeOptions()
-    prefs = {"savefile.default_directory" : "C:\\Users\\たくみ\\Documents\\Summer Intern mapRPA\\mapRPA\\ss"}
-    chromeOptions.add_experimental_option("prefs",prefs)
-    driver1 = webdriver.Chrome(options=chromeOptions)
-
-
-    #Chromeを操作
-    driver1 = webdriver.Chrome()
-    driver1.get('https://webgis.alandis.jp/chiba12/portal/index.html');
-
-    #同意ボタンを押す
-    agree_button = driver1.find_element(By.ID, 'agree')
-    agree_button.click()
-
-    #Chromeの設定
+    # Chromeの設定
     chromeOptions = webdriver.ChromeOptions()
     prefs = {
         "download.default_directory" : r"C:\Users\たくみ\Documents\Summer Intern mapRPA\mapRPA\ss",
         "download.directory_upgrade" : True,
         "savefile.default_directory" : r"C:\Users\たくみ\Documents\Summer Intern mapRPA\mapRPA\ss",
         "savefile.directory_upgrade" : True
-        }
-    chromeOptions.add_experimental_option("prefs",prefs)
+    }
+    chromeOptions.add_experimental_option("prefs", prefs)
     driver2 = webdriver.Chrome(options=chromeOptions)
 
-    #適当な場所の地図を開く
-    driver2.get('https://webgis.alandis.jp/chiba12/webgis/index.php/autologin_jswebgis?ap=jsWebGIS&m=2&u=guest1&x=15597323.5479798&y=4262337.39269382&s=5000&rs=3857&li=1&si=0');
+    # 適当な場所の地図を開く
+    driver2.get('https://webgis.alandis.jp/chiba12/webgis/index.php/autologin_jswebgis?ap=jsWebGIS&m=2&u=guest1&x=15597323.5479798&y=4262337.39269382&s=5000&rs=3857&li=1&si=0')
     time.sleep(3)
 
     # 検索ボタンが表示されるまで待つ
@@ -51,56 +36,68 @@ def get_map_pdf(addresses):
     address_button.click()
     time.sleep(3)
 
-    # "大字名"のドロップダウンから"稲毛区"を選択
-    district_select = Select(driver2.find_element(By.ID, 'srh_search_drilldown_1_attrvalue_1'))
-    district_select.select_by_visible_text('稲毛区')
-    time.sleep(1)
+    for address in addresses:
+        try:
+            # "大字名"のドロップダウンから指定された区を選択
+            district_select = Select(driver2.find_element(By.ID, 'srh_search_drilldown_1_attrvalue_1'))
+            district_select.select_by_visible_text(address["区"])
+            time.sleep(1)
+        except Exception:
+            print(f"{address['区']}は選べませんでした。")
+            continue
 
-    # "字町名"のドロップダウンから"稲毛２丁目"を選択
-    town_select = Select(driver2.find_element(By.ID, 'srh_search_drilldown_1_attrvalue_2'))
-    town_select.select_by_visible_text('稲毛２丁目')
-    time.sleep(3)
+        try:
+            # "字町名"のドロップダウンから指定された町名を選択
+            town_select = Select(driver2.find_element(By.ID, 'srh_search_drilldown_1_attrvalue_2'))
+            town_select.select_by_visible_text(address["町名"])
+            time.sleep(3)
+        except Exception:
+            print(f"{address['町名']}は選べませんでした。")
+            continue
 
-    # "街区"のドロップダウンから"１"を選択
-    town_select = Select(driver2.find_element(By.ID, 'srh_search_drilldown_1_attrvalue_3'))
-    town_select.select_by_visible_text('1')
-    time.sleep(3)
+        try:
+            # "街区"のドロップダウンから指定された街区を選択
+            block_select = Select(driver2.find_element(By.ID, 'srh_search_drilldown_1_attrvalue_3'))
+            block_select.select_by_visible_text(address["街区番号"])
+            time.sleep(3)
+        except Exception:
+            print(f"{address['街区番号']}は選べませんでした。")
+            continue
 
-    # 検索ボタンが表示されるまで待つ
-    wait3 = WebDriverWait(driver2, 30)  # 最大で30秒待機
-    search_button_2 = wait3.until(EC.visibility_of_element_located((By.ID, 'srh_search_drilldown_1_btn')))
-    search_button_2.click()
-    time.sleep(3)
+        # 検索ボタンが表示されるまで待つ
+        wait3 = WebDriverWait(driver2, 30)  # 最大で30秒待機
+        search_button_2 = wait3.until(EC.visibility_of_element_located((By.ID, 'srh_search_drilldown_1_btn')))
+        search_button_2.click()
+        time.sleep(3)
 
-    #ボタンが表示されるまで待つ
-    wait4 = WebDriverWait(driver2, 30)  # 最大で30秒待機
-    search_button_3 = wait3.until(EC.visibility_of_element_located((By.ID, 'index_hidden')))
-    search_button_3.click()
-    time.sleep(3)
+        # ボタンが表示されるまで待つ
+        wait4 = WebDriverWait(driver2, 30)  # 最大で30秒待機
+        search_button_3 = wait3.until(EC.visibility_of_element_located((By.ID, 'index_hidden')))
+        search_button_3.click()
+        time.sleep(3)
 
-    # ボタンが表示されるまで待つ
-    wait5 = WebDriverWait(driver2, 30)  # 最大で30秒待機
-    search_button_4 = wait3.until(EC.visibility_of_element_located((By.ID, 'sidemenu_tab_print')))
-    search_button_4.click()
-    time.sleep(3)
+        # ボタンが表示されるまで待つ
+        wait5 = WebDriverWait(driver2, 30)  # 最大で30秒待機
+        search_button_4 = wait3.until(EC.visibility_of_element_located((By.ID, 'sidemenu_tab_print')))
+        search_button_4.click()
+        time.sleep(3)
 
-    # ボタンが表示されるまで待つ
-    wait5 = WebDriverWait(driver2, 30)  # 最大で30秒待機
-    search_button_5 = wait3.until(EC.visibility_of_element_located((By.ID, 'sidemenu_menu_print_detail')))
-    search_button_5.click()
-    time.sleep(3)
+        # ボタンが表示されるまで待つ
+        wait5 = WebDriverWait(driver2, 30)  # 最大で30秒待機
+        search_button_5 = wait3.until(EC.visibility_of_element_located((By.ID, 'sidemenu_menu_print_detail')))
+        search_button_5.click()
+        time.sleep(3)
 
-    # ボタンが表示されるまで待つ
-    wait6 = WebDriverWait(driver2, 30)  # 最大で30秒待機
-    search_button_6 = wait3.until(EC.visibility_of_element_located((By.ID, 'prt_pdfOutput_printing_output')))
-    search_button_6.click()
-    time.sleep(20)
+        # ボタンが表示されるまで待つ
+        wait6 = WebDriverWait(driver2, 30)  # 最大で30秒待機
+        search_button_6 = wait3.until(EC.visibility_of_element_located((By.ID, 'prt_pdfOutput_printing_output')))
+        search_button_6.click()
+        time.sleep(20)
+
 # テストデータ
 addresses = [
-    {"区": "稲毛区", "町名": "稲毛", "丁目": "２丁目", "街区番号": "１番"},
-    # ... その他のテストデータもこの形式で追加 ...
+    {"区": "稲毛区", "町名": "稲毛２丁目", "街区番号": "o"}
 ]
 
-if __name__ == "__main__":
-    get_map_pdf(addresses)
 
+get_map_pdf(addresses)
