@@ -8,7 +8,7 @@ from selenium.webdriver.support.select import Select
 import time
 import re
 
-def get_map_pdf(adresses):
+def get_map_pdf(addresses):
     #Chromeの設定
     chromeOptions = webdriver.ChromeOptions()
     prefs = {"savefile.default_directory" : "C:\\Users\\たくみ\\Documents\\Summer Intern mapRPA\\mapRPA\\ss"}
@@ -59,7 +59,7 @@ def get_map_pdf(adresses):
     # "字町名"のドロップダウンから"稲毛２丁目"を選択
     town_select = Select(driver2.find_element(By.ID, 'srh_search_drilldown_1_attrvalue_2'))
     town_select.select_by_visible_text('稲毛２丁目')
-    time.sleep(1)
+    time.sleep(3)
 
     # "街区"のドロップダウンから"１"を選択
     town_select = Select(driver2.find_element(By.ID, 'srh_search_drilldown_1_attrvalue_3'))
@@ -95,5 +95,10 @@ def get_map_pdf(adresses):
     search_button_6 = wait3.until(EC.visibility_of_element_located((By.ID, 'prt_pdfOutput_printing_output')))
     search_button_6.click()
     time.sleep(20)
-
+# テストデータ
+addresses = [
+    {"区": "稲毛区", "町名": "稲毛", "丁目": "２丁目", "街区番号": "１番"},
+    # ... その他のテストデータもこの形式で追加 ...
+]
+get_map_pdf(addresses)
 
