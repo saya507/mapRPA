@@ -222,7 +222,8 @@ if __name__ == "__main__":
          print(message["subject"])
 
 def listmail():
-    query = "is:unread"
+    #query = "is:unread"
+    query = "住所取得依頼"
     #tag = "UNREAD"
     tag = "test"
     count = 10

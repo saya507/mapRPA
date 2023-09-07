@@ -100,5 +100,7 @@ addresses = [
     {"区": "稲毛区", "町名": "稲毛", "丁目": "２丁目", "街区番号": "１番"},
     # ... その他のテストデータもこの形式で追加 ...
 ]
-get_map_pdf(addresses)
+
+if __name__ == "__main__":
+    get_map_pdf(addresses)
 

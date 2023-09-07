@@ -58,9 +58,10 @@ address_list = [
     "千葉県千葉市美浜区真砂６丁目１−１"
 ]
 
-# Normalize addresses
-addresses_v26 = [normalize_address_v26(addr) for addr in address_list]
+if __name__ == "__main__":
+    # Normalize addresses
+    addresses_v26 = [normalize_address_v26(addr) for addr in address_list]
 
-# Format addresses
-formatted_addresses_v40 = [format_address_v14(addr) for addr in addresses_v26]
-print(formatted_addresses_v40)
+    # Format addresses
+    formatted_addresses_v40 = [format_address_v14(addr) for addr in addresses_v26]
+    print(formatted_addresses_v40)
