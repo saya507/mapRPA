@@ -138,7 +138,7 @@ def main(sender, to, subject, message_text, attach_file_path, cc=None):
     send_message(service, "me", message)
 
 
-def kick_main(flag,cus_address,pdf, sender,reason):
+def kick_main(flag,cus_address,pdf, sender):
     # 成功
     if flag == "OK": #変数決めて変更
         subject = "地図取得成功のお知らせ"
@@ -159,7 +159,7 @@ def kick_main(flag,cus_address,pdf, sender,reason):
     elif flag == "NG": #変数決めて変更
         subject = "地図取得失敗のお知らせ"
         message_text_file_path = "fail_all.html"
-        reason
+
 
         logging.basicConfig(level=logging.DEBUG)
         with open(message_text_file_path, "r", encoding="utf-8") as fp:

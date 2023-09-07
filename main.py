@@ -1,9 +1,11 @@
 from featureA.listmail import listmail
-from featureB.normalize_address import normalize_address
+from featureB.normalize_address_chan import normalize_address
+from featureB.normalize_address_road import normalize_address_v26
 from featureC import kick_main
 import json
 import featureC.__init__
 import my_mail_address
+import re
 
 def main():
     messages_json = listmail()
@@ -18,14 +20,25 @@ def main():
         return
 
     for message in messages_list:
-        research_address = normalize_address(message["body"])
+        research_address_chan = normalize_address(message["body"])
+        research_address_road = normalize_address_v26(message["body"])
+        print(message["body"])
         #print(research_address)
- 
+
+        # def BtoC(flag,customer_address,pdf):
+        #     flag = "NG"
+        #     customer_address = message["from"]
+        #     pdf = "test.pdf"
+        
         flag = "NG"
         customer_address = message["from"]
+        print(customer_address)
         pdf = "test.pdf"
-      
-        sender = my_mail_address.my_mail_address
+        # p = r'<(.+)>'
+        # m = re.search(p,customer_address)
+        # print(m.group(1))
+
+        sender = "agroup0101@gmail.com"
         kick_main(flag,customer_address,pdf,sender)
 
 main()
