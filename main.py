@@ -40,17 +40,17 @@ def main():
         #     customer_address = message["from"]
         #     pdf = "test.pdf"
         
-        flag = "NG"
+        flag = "OK"
         customer_address = message["from"]
         print(customer_address)
         pdf = "ss/map_chan"+str(cnt)+".pdf"
-        # p = r'<(.+)>'
-        # m = re.search(p,customer_address)
-        # print(m.group(1))
+        p = r'<(.+)>'
+        m = re.search(p,customer_address)
+        print(m.group(1))
  
         
         sender = my_mail_address.my_mail_address
-        kick_main(flag, customer_address, pdf, sender)
+        kick_main(flag, m.group(1), pdf, sender)
 
 
 main()
