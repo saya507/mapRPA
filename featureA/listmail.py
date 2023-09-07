@@ -25,8 +25,7 @@ from email.mime.text import MIMEText
 from apiclient import errors
 import logging
 from docopt import docopt
-from featureA.gmail_credential import get_credential
-#gmail_credential import get_credential
+from gmail_credential import get_credential
 
 logger = logging.getLogger(__name__)
 
