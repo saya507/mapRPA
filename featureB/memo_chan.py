@@ -18,7 +18,7 @@ def save_as_pdf(png_data, output_path):
     image.convert('RGB').save(output_path + ".pdf")
     print(f"Saved as: {output_path}.pdf")
 
-def get_map_pdf(addresses):
+def get_map_pdf(addresses, mail_num=0):
 
     # 1
 
@@ -100,7 +100,7 @@ def get_map_pdf(addresses):
         os.makedirs(directory)  # os.makedirsは、複数の階層のディレクトリも作成可能
 
     # 保存するPDFファイル名
-    fname = os.path.join(directory, "千葉市下水道地図1")
+    fname = os.path.join(directory, "map_chan" + str(mail_num))
 
     # イメージをPDFとして保存
     save_as_pdf(png_data, fname)
