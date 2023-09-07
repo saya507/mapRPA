@@ -63,7 +63,7 @@ def create_message_with_attachment(
         message["Cc"] = cc
     # attach message text
     enc = "utf-8"
-    msg = MIMEText(message_text.encode(enc), _charset=enc)
+    msg = MIMEText(message_text.encode(enc),'html', _charset=enc)
     message.attach(msg)
 
     content_type, encoding = mimetypes.guess_type(file_path)
@@ -138,11 +138,11 @@ def main(sender, to, subject, message_text, attach_file_path, cc=None):
     send_message(service, "me", message)
 
 
-def kick_main(flag,cus_address,pdf, sender):
+def kick_main(flag,cus_address,pdf, sender,reason):
     # 成功
-    if flag == "success": #変数決めて変更
+    if flag == "OK": #変数決めて変更
         subject = "地図取得成功のお知らせ"
-        message_text_file_path = "suc.text"
+        message_text_file_path = "suc.html"
         logging.basicConfig(level=logging.DEBUG)
         with open(message_text_file_path, "r", encoding="utf-8") as fp:
             message_text = fp.read()
@@ -156,9 +156,10 @@ def kick_main(flag,cus_address,pdf, sender):
         )
 
     # 失敗
-    elif flag == "false": #変数決めて変更
+    elif flag == "NG": #変数決めて変更
         subject = "地図取得失敗のお知らせ"
-        message_text_file_path = "fail_all.text"
+        message_text_file_path = "fail_all.html"
+        reason
 
         logging.basicConfig(level=logging.DEBUG)
         with open(message_text_file_path, "r", encoding="utf-8") as fp:
