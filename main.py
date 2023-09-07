@@ -2,12 +2,18 @@ from featureA.listmail import listmail
 import json
 import featureC.__init__
 from featureC import kick_main
-from . import my_mail_address
+import my_mail_address
 
 def main():
     messages_json = listmail()
-    messages_list = json.loads(messages_json)
-    print("type:"+str(type(messages_list)))
+    #print("type:"+str(type(messages_json)))
+
+    if(messages_json):
+        messages_list = json.loads(messages_json)
+        #print("type:"+str(type(messages_list)))
+    else:
+        print("error in listmail.py")
+        return
 
     for message in messages_list:
         research_address = message["body"]
