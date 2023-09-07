@@ -20,11 +20,13 @@ def main():
     for message in messages_list:
         research_address = normalize_address(message["body"])
         #print(research_address)
-
-        flag = "false"
+ 
+        flag = "NG"
         customer_address = message["from"]
         pdf = "test.pdf"
+      
         sender = my_mail_address.my_mail_address
         kick_main(flag,customer_address,pdf,sender)
 
 main()
+
