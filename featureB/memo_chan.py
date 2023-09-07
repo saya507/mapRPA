@@ -67,13 +67,13 @@ def get_map_pdf(addresses):
     for address in addresses:
         # 区の情報を入力
         elements["ELM_CMB_LEV1"].send_keys(address["区"])
-        time.sleep(1)
+        time.sleep(3)
         # 町名の情報を入力
         elements["ELM_CMB_LEV2"].send_keys(address["町名"])
-        time.sleep(1)
+        time.sleep(3)
         # 丁名の情報を入力
         elements["ELM_CMB_LEV3"].send_keys(address["丁目"])
-        time.sleep(1)
+        time.sleep(3)
         # 番地の情報を入力
         elements["ELM_CMB_LEV4"].send_keys(address["街区番号"])
 
@@ -86,7 +86,7 @@ def get_map_pdf(addresses):
     #4
 
     driver.maximize_window()
-
+    time.sleep(3)
     # イメージ取得
     element = driver.find_element(By.ID, 'divMapControl')
     png_data = element.screenshot_as_png  # png = 画像
