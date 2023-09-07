@@ -50,9 +50,11 @@ def refine_address(address):
         address["街区番号"] += "番"
     return address
 
-# 既存の正規化された住所リストを再調整
-refined_addresses = [refine_address(addr) for addr in addresses]
-print(refined_addresses)
+if __name__ == "__main__":
+    # 既存の正規化された住所リストを再調整
+    refined_addresses = [refine_address(addr) for addr in addresses]
+    print(refined_addresses)
+
 """
 # Chromeを操作
 driver = webdriver.Chrome()

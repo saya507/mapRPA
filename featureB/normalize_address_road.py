@@ -1,5 +1,30 @@
 import re
 
+
+def normalize_address(address):
+    # 住所の基本的な正規化
+    address = address.replace("－", "-").replace("ー", "-")
+
+    # 各部分を抽出するための正規表現
+    district_match = re.search(r"([^市]+市)?([^区]+区)", address)
+    town_match = re.search(r"([^区]+区)?([^丁目]+)", address)
+    block_match = re.search(r"(\d+丁目)?(\d+[-−番号\d+]*[-−番号\d+]?)", address)
+
+    district, town, block_num, street_num = "", "", "", ""
+    if district_match:
+        district = district_match.group(2) if district_match.group(2) else ""
+    if town_match:
+        town = re.sub(r'\d+', '', town_match.group(2)) if town_match.group(2) else ""
+    if block_match:
+        block_num = block_match.group(1) if block_match.group(1) else ""
+        street_num_parts = block_match.group(2).replace("番", "").replace("号", "").replace("−", "-").split("-")
+        if len(street_num_parts) > 1:
+            #street_num = street_num_parts[0] + "番" if street_num_parts[0].isdigit() else ""
+            street_num = street_num_parts[0] if street_num_parts[0].isdigit() else ""
+
+    return {"区": district, "町名丁目": town+block_num, "街区番号": street_num}
+
+
 def normalize_address_v26(address):
     # 住所の基本的な正規化
     address = address.replace("－", "-").replace("ー", "-")
@@ -58,9 +83,10 @@ address_list = [
     "千葉県千葉市美浜区真砂６丁目１−１"
 ]
 
-# Normalize addresses
-addresses_v26 = [normalize_address_v26(addr) for addr in address_list]
+if __name__ == "__main__":
+    # Normalize addresses
+    addresses_v26 = [normalize_address_v26(addr) for addr in address_list]
 
-# Format addresses
-formatted_addresses_v40 = [format_address_v14(addr) for addr in addresses_v26]
-print(formatted_addresses_v40)
+    # Format addresses
+    formatted_addresses_v40 = [format_address_v14(addr) for addr in addresses_v26]
+    print(formatted_addresses_v40)

@@ -8,7 +8,7 @@ from selenium.webdriver.support.select import Select
 import time
 import re
 
-def get_map_pdf(addresses):
+def get_map_pdf(addresses, mail_num=0):
     #Chromeの設定
     chromeOptions = webdriver.ChromeOptions()
     prefs = {"savefile.default_directory" : "C:\\Users\\たくみ\\Documents\\Summer Intern mapRPA\\mapRPA\\ss"}
@@ -27,9 +27,9 @@ def get_map_pdf(addresses):
     #Chromeの設定
     chromeOptions = webdriver.ChromeOptions()
     prefs = {
-        "download.default_directory" : r"C:\Users\たくみ\Documents\Summer Intern mapRPA\mapRPA\ss",
+        "download.default_directory" : r"ss",
         "download.directory_upgrade" : True,
-        "savefile.default_directory" : r"C:\Users\たくみ\Documents\Summer Intern mapRPA\mapRPA\ss",
+        "savefile.default_directory" : r"ss",
         "savefile.directory_upgrade" : True
         }
     chromeOptions.add_experimental_option("prefs",prefs)
@@ -100,5 +100,7 @@ addresses = [
     {"区": "稲毛区", "町名": "稲毛", "丁目": "２丁目", "街区番号": "１番"},
     # ... その他のテストデータもこの形式で追加 ...
 ]
-get_map_pdf(addresses)
+
+if __name__ == "__main__":
+    get_map_pdf(addresses)
 
