@@ -1,5 +1,6 @@
 import re
 
+
 def normalize_address(address):
     # 住所の基本的な正規化
     address = address.replace("－", "-").replace("ー", "-")
@@ -22,6 +23,7 @@ def normalize_address(address):
             street_num = street_num_parts[0] if street_num_parts[0].isdigit() else ""
 
     return {"区": district, "町名丁目": town+block_num, "街区番号": street_num}
+
 
 def normalize_address_v26(address):
     # 住所の基本的な正規化
